@@ -8,10 +8,16 @@ jobs:
 build-and-deploy:
 run-on: ubuntu-latest
 steps:
--name: checkout
+- name: checkout
 uses: actions/checkout@v1
 
--name: configure AWS Creditentials
+- name: Configure AWS Credentials
 uses: aws-actions/configure-aws-credential@v1
 with:
-aws-access-key-id:
+aws-secret-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+aws-secret-access-key: ${{ secrets.AWS_SECRT_ACCESS_KEY }}
+aws-region: us-west-1
+
+- name: deploy app to s3 bucket
+run: aws s3 sync . s3//phpappbucket --delete
+
