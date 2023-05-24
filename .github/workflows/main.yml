@@ -1,0 +1,17 @@
+name: phpapp deployment
+
+on:
+push:
+branches:
+- main
+jobs:
+build-and-deploy:
+run-on: ubuntu-latest
+steps:
+-name: checkout
+uses: actions/checkout@v1
+
+-name: configure AWS Creditentials
+uses: aws-actions/configure-aws-credential@v1
+with:
+aws-access-key-id:
